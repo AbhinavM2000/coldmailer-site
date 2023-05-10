@@ -21,6 +21,8 @@ To use ColdMailer, simply follow these steps:
 ## Code (Coming soon)
   
 Code will be added after cleaning and optimising.
+<br>
+New functionalities coming soon.
   
 ## License
 
