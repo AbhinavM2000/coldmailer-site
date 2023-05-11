@@ -1,6 +1,6 @@
 # ColdMailer
 <p align="center">
-  <img src="https://coldmailer.site/android-chrome-512x512.png"/>
+  <img src="https://coldmailer.site/android-chrome-192x192.png"/>
 </p>
 
 A JS based utility to speed up cold emailing, useful for people looking for opportunities in Academia.
