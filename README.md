@@ -6,7 +6,7 @@
 A JS based utility to speed up cold emailing, useful for people looking for opportunities in Academia.
 
 
-ColdMailer is a simple web application that allows you to send personalized emails to multiple recipients using the "mailto" protocol. Simply enter a list of names, email addresses, a subject line, and the body of the email, and ColdMailer will generate a series of "mailto" links that you can use to send the emails with prefilled salutation line including the recipeint name. (Dear Prof. <name> by default).
+ColdMailer is a simple web application that allows you to send personalized emails to multiple recipients using the "mailto" protocol. Simply enter a list of names, email addresses, a subject line, and the body of the email, and ColdMailer will generate a series of "mailto" links that you can use to send the emails with prefilled salutation line including the recipeint name.
 
 ## Demo
 
