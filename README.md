@@ -24,7 +24,7 @@ To use ColdMailer, simply follow these steps:
 
 ## Code (Coming soon)
   
-Code will be added after cleaning and optimising.
+Code will be added soon.
 <br>
 New functionalities coming soon.
   
