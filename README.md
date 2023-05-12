@@ -22,11 +22,6 @@ To use ColdMailer, simply follow these steps:
 4. Click on the name of a recipient to open their "mailto" link in a new window. This will open your default email client and create a new email message with the recipient's email address, subject line, and body of the email pre-populated.
 5. Send away !
 
-## Code (Coming soon)
-  
-Code will be added soon.
-<br>
-New functionalities coming soon.
   
 ## License
 
