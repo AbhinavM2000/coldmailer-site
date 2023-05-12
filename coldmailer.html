@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <meta charset="UTF-8">
+      <meta name="description" content="Simplify your cold emailing process with our tool. Send personalized emails with dynamic salutations to multiple recipients quickly and easily. Try it out now and save time!" />
+      <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+      <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+      <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+      <link rel="manifest" href="/site.webmanifest">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+      <title>ColdMailer - Email multiple people | Cold Email Online</title>
+      <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+      <script>
+         function handleSubmit() {
+           var form = document.querySelector("form");
+           var nameInput = form.querySelector("input[name=name]");
+           var salutationInput = form.querySelector("input[name=salutation]");
+           var emailInput = form.querySelector("input[name=email]");
+           var subjectInput = form.querySelector("input[name=subject]"); // add new input field for subject
+           var bodyInput = form.querySelector("textarea[name=body]");
+           var names = nameInput.value.split(",");
+           var emails = emailInput.value.split(",");
+           
+           // Check if required fields are empty
+           if (!nameInput.value || !emailInput.value) {
+             swal.fire("Please fill out all required fields.");
+             return;
+           }
+           
+           // Check if email format is valid
+           var emailRegex = /^\S+@\S+\.\S+$/;
+           for (var i = 0; i < emails.length; i++) {
+             if (!emailRegex.test(emails[i].trim())) {
+               swal.fire("Please enter a valid email address.");
+               return;
+             }
+           }
+           var showWarning = false;
+         if (!subjectInput.value) {
+           subjectInput.classList.add("missing-field");
+           showWarning = true;
+         }
+         if (!bodyInput.value) {
+           bodyInput.classList.add("missing-field");
+           showWarning = true;
+         }
+         if (showWarning) {
+           swal.fire({
+             title: "Warning !",
+             text: "You haven't provided a subject or body for your emails. Reload the page if you wish to start over.",
+             icon: "warning",
+             confirmButtonText: "Proceed Anyway"
+           });
+         }
+           var buttonsDiv = document.createElement("div"); // create a new div to hold the buttons
+           buttonsDiv.style.display = "flex";
+           buttonsDiv.style.flexDirection = "column"; // display buttons vertically
+           buttonsDiv.style.alignItems = "center"; // center the buttons horizontally
+           buttonsDiv.style.justifyContent = "center";   
+           buttonsDiv.style.gap = "10px";
+           var title = document.createElement("h2"); // create a new h2 element for the title
+           title.style.color = "white";
+           title.textContent = "Press buttons to send mail:"; // set the text content of the title
+           buttonsDiv.appendChild(title); // append the title to the buttonsDiv
+         for (var i = 0; i < names.length; i++) {
+           var name = names[i].trim();
+           var email = emails[i].trim();
+           if (name && email) {
+             var salutation = salutationInput.value.trim();
+             var subject = subjectInput.value.trim();
+             var body = bodyInput.value.trim();
+             var mailtoLink = "mailto:" + email;
+             if (subject) {
+               mailtoLink += "?subject=" + encodeURIComponent(subject);
+             }
+             if (body) {
+               body = salutation + " " + name + ",\n\n" + body;
+           mailtoLink += "&body=" + encodeURIComponent(body);
+             }
+             console.log("name:", name);
+             console.log("email:", email);
+             console.log("subject:", subject);
+             console.log("mailtoLink:", mailtoLink);
+             var button = document.createElement("button");
+             button.innerHTML = name;
+             button.className = "email-button";
+         button.onclick = function(mailtoLink) {
+           return function() {
+             window.open(mailtoLink);
+             var clickedButton = event.target;
+             var parent = clickedButton.parentNode;
+             parent.removeChild(clickedButton);
+             var remainingButtons = document.querySelectorAll('.email-button');
+             if (remainingButtons.length === 0) {
+               Swal.fire({
+                 title: 'Good Luck!',
+                 html: '<center>All mails sent!</center>',
+                 icon: 'success',
+                 confirmButtonText: 'OK'
+               }).then((result) => {
+                 if (result.isConfirmed) {
+                   location.reload(); // reload the page
+                 }
+               });
+             }
+           };
+         }(mailtoLink);
+             buttonsDiv.appendChild(button);
+               
+           }
+         }
+         
+           form.parentNode.replaceChild(buttonsDiv, form); // replace the form with the new div
+         }
+         
+             
+      </script>
+   </head>
+   <!-- Google tag (gtag.js) -->
+   <script async src="https://www.googletagmanager.com/gtag/js?id=G-TN8GY3FWJC"></script>
+   <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      
+      gtag('config', 'G-TN8GY3FWJC');
+   </script>
+   <style>
+      /* Style the form */
+      /* form container */
+      form {
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 20px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      background-color: #f7f7f7;
+      font-family: Arial, sans-serif;
+      }
+      /* form labels */
+      form label {
+      display: inline-block;
+      margin-bottom: 10px;
+      font-size: 16px;
+      font-weight: bold;
+      }
+      /* form input fields */
+      form input[type=text],
+      form textarea {
+      display: block;
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      font-size: 16px;
+      font-family: Arial, sans-serif;
+      box-sizing: border-box;
+      margin-bottom: 20px;
+      }
+      .email-button {
+      background-color: #0077c2;
+      color: white;
+      text-align: center;
+      border: none;
+      border-radius: 5px;
+      padding: 10px 20px;
+      margin: 10px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background-color 0.2s ease-in-out;
+      width: 200px;
+      max-width: 100%;
+      }
+      .container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      }
+      .email-button:hover {
+      background-color: #005ea6;
+      }
+      /* form button */
+      form button[type=button] {
+      background-color: #4CAF50;
+      color: #fff;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      }
+      form button[type=button]:hover {
+      background-color: #3e8e41;
+      }
+      /* form error messages */
+      form input:invalid,
+      form textarea:invalid {
+      border-color: #ff6347;
+      }
+      form input:invalid + span,
+      form textarea:invalid + span {
+      display: block;
+      margin-top: -20px;
+      margin-bottom: 20px;
+      color: #ff6347;
+      font-size: 14px;
+      }
+      form input:valid,
+      form textarea:valid {
+      border-color: #ccc;
+      }
+      form input:valid + span,
+      form textarea:valid + span {
+      display: none;
+      }
+      /* form responsiveness */
+      @media (max-width: 480px) {
+      form {
+      padding: 10px;
+      }
+      form input[type=text],
+      form textarea {
+      font-size: 14px;
+      margin-bottom: 10px;
+      }
+      form button[type=button] {
+      font-size: 14px;
+      padding: 8px 16px;
+      }
+      }
+      /* form error messages */
+      form input:invalid,
+      form textarea:invalid {
+      border-color: #ff6347;
+      }
+      form input:invalid + span,
+      form textarea:invalid + span {
+      display: block;
+      margin-top: -20px;
+      margin-bottom: 20px;
+      color: #ff6347;
+      font-size: 14px;
+      }
+      form input:valid,
+      form textarea:valid {
+      border-color: #ccc;
+      }
+      form input:valid + span,
+      form textarea:valid + span {
+      display: none;
+      }
+      /* form error messages */
+      form input:invalid,
+      form textarea:invalid {
+      border-color: #ff6347;
+      }
+      form input:invalid + span,
+      form textarea:invalid + span {
+      display: block;
+      margin-top: -20px;
+      margin-bottom: 20px;
+      color: #ff6347;
+      font-size: 14px;
+      }
+      .email-button:active {
+      background-color: grey;
+      }
+      form input:valid,
+      form textarea:valid {
+      border-color: #ccc;
+      }
+      form input:valid + span,
+      form textarea:valid + span {
+      display: none;
+      }
+      /* Style the input fields */
+      input[type=text] {
+      width: 100%;
+      padding: 12px 20px;
+      margin: 8px 0;
+      box-sizing: border-box;
+      border: 2px solid #ccc;
+      border-radius: 4px;
+      background-color: #f8f8f8;
+      font-size: 16px;
+      }
+      /* Style the button */
+      button {
+      background-color: #4CAF50;
+      color: white;
+      padding: 12px 20px;
+      margin: 8px 0;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      width: 100%;
+      font-size: 16px;
+      }
+      /* Style the button container */
+      #buttons-container {
+      max-width: 600px;
+      margin: auto;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      }
+      body {
+      margin-top: 35px;
+      background-color: black;
+      }
+      /* Style the buttons */
+      button + button {
+      margin-top: 10px;
+      }
+      /* Add responsive media queries */
+      @media only screen and (max-width: 600px) {
+      form {
+      max-width: 90%;
+      }
+      }
+   </style>
+   <body onload="showInstructions()">
+      <form>
+         <label for="name">Name(s) of Recipients: </label>
+         <input type="text" name="name" required placeholder="e.g. John Doe, Jane Smith">
+         <br>
+         <label for="email">Email(s): </label>
+         <input type="text" name="email" required placeholder="e.g. john.doe@example.com, jane.smith@example.com">
+         <br>
+         <label for="subject">Subject of your email: </label>
+         <input type="text" name="subject" placeholder="eg: Internship Opportunity"> <!-- add input field for email subject -->
+         <br>
+         <label for="salutation">Salutation: </label>
+         <input type="text" name="salutation" placeholder="e.g. Dear Prof.">
+         <br>
+         <label for="body">Body of email: </label>
+         <textarea name="body" placeholder="Enter email body (Salutation is automatically added, so ignore that line here.)"></textarea>
+         <br><br>
+         <button type="button" onclick="handleSubmit()" style="background-color: #007BFF; color: white; padding: 10px;">Generate Links</button>
+      </form>
+      <style>
+         .instructions-popup {
+         text-align: left;
+         font-size: 18px;
+         line-height: 1.5;
+         padding: 20px;
+         }
+         .instructions-popup h2 {
+         margin-top: 0;
+         font-size: 24px;
+         margin-bottom: 20px;
+         }
+         .instructions-popup p {
+         margin-bottom: 20px;
+         }
+         .instructions-popup ul {
+         margin: 0;
+         padding: 0;
+         margin-bottom: 20px;
+         }
+         .instructions-popup li {
+         margin-bottom: 10px;
+         }
+         .swal2-popup .swal2-html-container {
+         font-size: 16px;
+         text-align: justify;
+         line-height: 1.5;
+         }
+         .swal2-popup .swal2-title {
+         font-size: 24px;
+         font-weight: bold;
+         margin-bottom: 20px;
+         }
+         .swal2-popup .swal2-confirm {
+         background-color: #007bff;
+         color: #fff;
+         font-weight: bold;
+         font-size: 16px;
+         padding: 10px 25px;
+         border-radius: 5px;
+         margin-top: 20px;
+         }
+         .swal2-popup .swal2-confirm:hover {
+         background-color: #0062cc;
+         }
+         a img {
+         border: none;
+         outline: none;
+         }
+         .my-swal-icon img {
+         border: none;
+         outline: none;
+         }
+         .instructions-popup .swal2-icon img {
+         width: 50px !important;
+         height: 50px !important;
+         }
+      </style>
+      <script>
+         function showInstructions() {
+           Swal.fire({
+             title: 'Welcome to ColdMailer!',
+             html: '<center>This is a tool to make sending those Coldmails easier. Free and no Ads !<br><a href="https://github.com/AbhinavM2000/coldmailer-site/tree/main"><img src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png" alt="GitHub" width="50" height="50"></a><br>Ever wanted to email several people with slightly personalized email content and with the salutation and name dynamically updated ? <br>Well, you came to the right place.<br/><br>Click "Next" to proceed.</center>',
+             iconHtml: '<img src="android-chrome-192x192.png" alt="icon" style="width: 100px;">',
+             confirmButtonText: 'Next &rarr;',
+             allowOutsideClick: false,
+             width: 700,
+             allowEscapeKey: false,
+             showCloseButton: false,
+              customClass: {
+             icon: 'my-swal-icon'
+           },
+             focusConfirm: false,
+             didOpen: () => {
+               // add a class to the popup message to customize its appearance
+               const popupMessage = Swal.getContent().querySelector('.swal2-html-container');
+               popupMessage.classList.add('instructions-popup');
+             }
+           }).then((result) => {
+             if (result.isConfirmed) {
+               Swal.fire({
+                 title: 'Instructions',
+                 html: '<ul><li>Enter your recipient names and emails as comma separated values.<br> (Salutation + name is appended automatically to top of body paragraph)</li><br><li>This website uses your default email client and will not send emails directly.<br>You will get to see a preview in your client before mail is sent, here you can personalize the content before sending.</li><br><li>The data you enter is not stored in the server.</li><br><li>If you want to include attachments, add as links in body.</li><br><li>Disable AD Blocker if you encounter issues.</li><br><b><p style="color: red; font-weight: bold;">Disclaimer:</p> <p>This tool is intended solely for making the process of searching for opportunities via email easier and is not to be used for mass mailing purposes. We strongly discourage the use of this tool to send unsolicited or spam emails. Instead, we recommend using it for targeted communication with each recipient, where you can customize the email content according to the specific nature of your interaction with them. Using this tool ethically and responsibly will help you save time and avoid negative consequences, such as damage to your reputation or loss of opportunities. The creator of this software will not be held responsible for any misuse of the tool and its consequences.</p><b></ul>',
+                 iconHtml: '<img src="android-chrome-192x192.png"  alt="icon" style="width: 100px;">',
+                 confirmButtonText: 'I Understand',
+                 allowOutsideClick: false,
+                 width: 700,
+                 allowEscapeKey: false,
+                 showCloseButton: false,
+                 focusConfirm: false,
+                 didOpen: () => {
+                   // add a class to the popup message to customize its appearance
+                   const popupMessage = Swal.getContent().querySelector('.swal2-html-container');
+                   popupMessage.classList.add('instructions-popup');
+                 }
+               });
+             }
+           });
+         }
+         
+           
+      </script>
+   </body>
+</html>
